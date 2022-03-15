@@ -1,0 +1,19 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gitops-bootstrapper
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: openshift-gitops
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://github.com/danifernandezs/RHACM-OADP-Operator-via-GitOps.git
+    targetRevision: main
+    path: global-config/gitops-config-as/
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
