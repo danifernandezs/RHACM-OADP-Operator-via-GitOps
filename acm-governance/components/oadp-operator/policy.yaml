@@ -9,8 +9,7 @@ metadata:
     policy.open-cluster-management.io/categories: PR.IP Information Protection Processes and Procedures
     policy.open-cluster-management.io/controls: PR.IP-1 Baseline Configuration
 spec:
-  # remediationAction: inform
-  remediationAction: enforce
+  remediationAction: inform
   disabled: false
   policy-templates:
     - objectDefinition:
@@ -36,38 +35,3 @@ spec:
                   source: redhat-operators
                   sourceNamespace: openshift-marketplace
                   startingCSV: oadp-operator.v1.0.1
----
-apiVersion: policy.open-cluster-management.io/v1
-kind: PlacementBinding
-metadata:
-  name: oadpoperator-binding-policy
-  namespace: rhacm-policies
-placementRef:
-  name: oadp-placement-policy
-  kind: PlacementRule
-  apiGroup: apps.open-cluster-management.io
-subjects:
-  - name: oadpoperator-policy
-    kind: Policy
-    apiGroup: policy.open-cluster-management.io
----
-apiVersion: apps.open-cluster-management.io/v1
-kind: PlacementRule
-metadata:
-  name: oadp-placement-policy
-  namespace: rhacm-policies
-spec:
-  clusterConditions:
-    - status: 'True'
-      type: ManagedClusterConditionAvailable
-spec:
-  clusterConditions:
-    - status: 'True'
-      type: ManagedClusterConditionAvailable
-  clusterSelector:
-    matchExpressions:
-      - key: environment
-        operator: In
-        values:
-          - development
-          # - production
