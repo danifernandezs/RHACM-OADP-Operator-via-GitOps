@@ -1,0 +1,10 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+- ../../base
+patches:
+- ./presync-01-aj.yaml
+- ./presync-02-aj.yaml
+- ./postsync-01-aj.yaml

@@ -1,0 +1,28 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: oadp-operator
+  namespace: openshift-gitops
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/danifernandezs/RHACM-OADP-Operator-via-GitOps.git
+      revision: main
+      files:
+      - path: "cluster-definition/**/cluster.json"
+  template:
+    metadata:
+      name: '{{cluster.name}}-oadp-operator'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/danifernandezs/RHACM-OADP-Operator-via-GitOps.git
+        targetRevision: main
+        path: cluster-addons/components/oadp-operator/overlays/{{cluster.name}}
+      destination:
+        server: '{{cluster.address}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
