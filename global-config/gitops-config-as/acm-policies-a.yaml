@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: acm-policies-a
+  name: acm-policies
   namespace: openshift-gitops
 spec:
   destination:
