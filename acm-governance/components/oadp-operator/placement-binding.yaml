@@ -1,0 +1,14 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: oadpoperator-binding-policy
+  namespace: rhacm-policies
+placementRef:
+  name: oadp-placement-policy
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+  - name: oadpoperator-policy
+    kind: Policy
+    apiGroup: policy.open-cluster-management.io
