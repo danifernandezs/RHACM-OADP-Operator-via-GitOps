@@ -1,0 +1,19 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-addons-a
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: openshift-gitops
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://github.com/danifernandezs/RHACM-OADP-Operator-via-GitOps.git
+    targetRevision: main
+    path: cluster-addons/cluster-addons-as
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
